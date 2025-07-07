@@ -96,3 +96,68 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+## Feature 
+🟢 1. User Management & Role-based Access
+User registration & login
+
+Role system: ADMIN, EDITOR, VIEWER
+
+Admin can manage (add/remove) users
+
+Editors can edit articles, Viewers can only view
+
+(Upcoming) OAuth login via Google
+
+📌 Prevent unauthorized users from editing content.
+
+🟢 2. Article Management (Core Functionality)
+Full CRUD for articles: title, content (Markdown or rich text)
+
+Article status: Draft, Published, Archived
+
+Notion-like editing experience
+
+Auto-save draft content
+
+Support for tagging
+
+Organize articles into folders (Categories)
+
+📌 Easy writing and clear organization like Google Docs.
+
+🟢 3. Search & Filter
+Full-text search by keyword
+
+Filter by category or tag
+
+Sort by creation or last updated date
+
+(Bonus) AI keyword suggestions while typing
+
+📌 Quickly find articles as the team grows.
+
+🟢 4. Category Management
+Create multiple categories (nested allowed)
+
+Assign articles to categories
+
+Move articles between categories
+
+📌 For separating by topics: "Dev", "Marketing", "HR", "Product"...
+
+🟢 5. Versioning & History
+Automatically save a new version on every update
+
+View previous versions of articles
+
+(Bonus) Compare differences between versions
+
+📌 Safely rollback when someone updates incorrectly.
+
+🟢 6. Tag System
+Dynamic tags (create as needed)
+
+Assign multiple tags per article
+
+Filter by tag

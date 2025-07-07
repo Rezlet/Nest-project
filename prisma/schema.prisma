@@ -15,7 +15,81 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      Role     @default(VIEWER)
+  createdAt DateTime @default(now())
+
+  articles  Article[] 
+}
+
+model Article {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     Json     // Dùng kiểu JSON để linh hoạt như Notion/Markdown block
+  status      ArticleStatus @default(DRAFT)
+  authorId    String
+  categoryId  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  author      User     @relation(fields: [authorId], references: [id])
+  category    Category? @relation(fields: [categoryId], references: [id])
+
+  tags        ArticleTag[]
+  versions    ArticleVersion[]
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  parentId  String?
+  createdAt DateTime @default(now())
+
+  parent    Category? @relation("CategoryToSub", fields: [parentId], references: [id])
+  children  Category[] @relation("CategoryToSub")
+
+  articles  Article[]
+}
+
+model Tag {
+  id    String @id @default(cuid())
+  name  String @unique
+
+  articles ArticleTag[]
+}
+
+model ArticleTag {
+  articleId String
+  tagId     String
+
+  article   Article @relation(fields: [articleId], references: [id])
+  tag       Tag     @relation(fields: [tagId], references: [id])
+
+  @@id([articleId, tagId])
+}
+
+model ArticleVersion {
+  id        String   @id @default(cuid())
+  articleId String
+  content   Json
+  createdAt DateTime @default(now())
+
+  article   Article @relation(fields: [articleId], references: [id])
+}
+
+enum Role {
+  ADMIN
+  EDITOR
+  VIEWER
+}
+
+enum ArticleStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
 }
