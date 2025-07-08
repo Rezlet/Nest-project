@@ -30,7 +30,7 @@ describe('AuthService', () => {
         {
           provide: I18nService,
           useValue: {
-            t: jest.fn().mockImplementation((key) => key),
+            t: jest.fn().mockImplementation((key: string): string => key),
           },
         },
       ],

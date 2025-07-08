@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { I18nModule, AcceptLanguageResolver, QueryResolver, HeaderResolver } from 'nestjs-i18n';
 import * as path from 'path';
-
+const isProd = process.env.NODE_ENV === 'production';
 @Module({
   imports: [
     I18nModule.forRoot({
       fallbackLanguage: 'en',
       loaderOptions: {
-        path: path.join(__dirname, '../../../src/i18n/'),
+        path: isProd ? path.join(__dirname, '../../i18n') : path.join(process.cwd(), 'src/i18n'),
         watch: true,
       },
       resolvers: [

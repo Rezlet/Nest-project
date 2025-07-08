@@ -21,3 +21,6 @@ CMD ["node", "dist/main"]
 
 # 8. Mở cổng 3000 (NestJS mặc định)
 EXPOSE 3000
+
+# 9. Mở cổng 5555 (Prisma studio)
+EXPOSE 5555

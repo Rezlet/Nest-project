@@ -8,3 +8,14 @@ services:
     image: postgres
     environment:
       POSTGRES_PASSWORD: example
+
+  studio:
+    build: .
+    ports:
+      - "5555:5555"
+    command: npx prisma studio
+    depends_on:
+      - app
+    volumes:
+      - .:/app
+      - ./.env:/app/.env

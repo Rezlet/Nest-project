@@ -6,7 +6,11 @@ import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable({})
 export class AuthService {
-  constructor(private readonly prisma: PrismaService, private readonly logger: Logger, private readonly i18n: I18nService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly logger: Logger,
+    private readonly i18n: I18nService,
+  ) {}
 
   signup() {
     this.logger.log('This is a log');
