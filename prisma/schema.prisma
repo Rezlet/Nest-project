@@ -29,7 +29,7 @@ model Article {
   id          String   @id @default(cuid())
   title       String
   slug        String   @unique
-  content     Json     // Dùng kiểu JSON để linh hoạt như Notion/Markdown block
+  content     Json    
   status      ArticleStatus @default(DRAFT)
   authorId    String
   categoryId  String?
