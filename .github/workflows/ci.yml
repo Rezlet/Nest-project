@@ -1,0 +1,35 @@
+name: 🛠️ CI Pipeline
+
+on:
+  push:
+    branches: [main, develop, master]
+  pull_request:
+    branches: [main, develop, master]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get sources from github
+        uses: actions/checkout@v3
+
+      - name: Install Nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 📦 Isntall dependencies
+        run: npm ci
+
+      - name: 🔍 Run ESLint
+        run: npm run lint
+
+      - name: 📄 Check Prettier
+        run: npx prettier --check .
+
+      - name: Run UT
+        run: npm run test:cov
+
+      - name: Test build
+        run: npm run build
