@@ -3,7 +3,7 @@ services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - '3000:3000'
   db:
     image: postgres
     environment:
@@ -12,7 +12,7 @@ services:
   studio:
     build: .
     ports:
-      - "5555:5555"
+      - '5555:5555'
     command: npx prisma studio
     depends_on:
       - app
