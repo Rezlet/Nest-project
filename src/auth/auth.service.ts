@@ -1,8 +1,11 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { I18nService } from 'nestjs-i18n';
 import { Logger } from 'nestjs-pino';
-import { TestException } from 'src/common/exceptions/test-exception/test.exception';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { RegisterDto } from './dto/register.dto';
+import { UsersService } from 'src/user/user.service';
+import { JwtService } from '@nestjs/jwt';
+import * as bcrypt from 'bcrypt';
 
 @Injectable({})
 export class AuthService {
@@ -10,14 +13,26 @@ export class AuthService {
     private readonly prisma: PrismaService,
     private readonly logger: Logger,
     private readonly i18n: I18nService,
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService,
   ) {}
 
-  signup() {
-    this.logger.log('This is a log');
-    this.logger.warn('This is a warning');
-    this.logger.error('This is an error');
-    throw new TestException(this.i18n.t('auth.invalid_credentials'), HttpStatus.NOT_FOUND);
-    return { msg: 'I am signed up' };
+  async signup(dto: RegisterDto) {
+    const existingUser = await this.usersService.findByEmail(dto.email);
+    if (existingUser) {
+      throw new ConflictException('Email already registered');
+    }
+
+    // const hashedPassword = await bcrypt.hash(dto.password, 10);
+    const user = await this.usersService.create(dto.email, dto.password);
+
+    const payload = { sub: user.id, email: user.email };
+    // const token = this.jwtService.sign(payload);
+
+    return {
+      message: 'Signup successful',
+      // access_token: token,
+    };
   }
 
   signin() {
