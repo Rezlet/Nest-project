@@ -23,7 +23,8 @@ jobs:
         run: npm cache clean --force
 
       - name: 📦 Isntall dependencies
-        run: npm ci
+        run: npm install
+
 
       - name: Generate Prisma Client
         run: npx prisma generate
