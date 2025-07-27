@@ -22,6 +22,7 @@ jobs:
       - name: 📦 Isntall dependencies
         run: npm install
 
+
       - name: 🔍 Run ESLint
         run: npm run lint
 
