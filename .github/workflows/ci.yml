@@ -25,7 +25,6 @@ jobs:
       - name: 📦 Isntall dependencies
         run: npm install
 
-
       - name: Generate Prisma Client
         run: npx prisma generate
 
