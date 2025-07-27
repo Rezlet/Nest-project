@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AllExceptionsFilter } from './common/exceptions/http-exception.filter';
 import { rateLimitMiddleware } from './middleware';
+import * as dotenv from 'dotenv';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -20,7 +21,11 @@ async function bootstrap() {
   SwaggerModule.setup('api-docs', app, document);
 
   app.use(rateLimitMiddleware);
-
+  dotenv.config();
+  app.enableCors({
+    origin: 'http://localhost:3001',
+    credentials: true,
+  });
   app.useGlobalFilters(new AllExceptionsFilter());
   await app.listen(3000);
 }

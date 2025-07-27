@@ -9,10 +9,10 @@ import { LoggerModule } from 'nestjs-pino';
           target: 'pino-pretty',
           options: {
             options: {
-              colorize: true, // 🎨 màu sắc
-              singleLine: true, // 🧵 in trên 1 dòng
-              translateTime: 'HH:MM:ss.l', // ⏱ định dạng thời gian
-              ignore: 'pid,hostname', // 🧹 ẩn bớt thông tin dư
+              colorize: true,
+              singleLine: true,
+              translateTime: 'HH:MM:ss.l',
+              ignore: 'pid,hostname',
             },
           },
         },
