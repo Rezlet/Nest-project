@@ -5,14 +5,7 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
   {
-    ignores: [
-      'eslint.config.mjs',
-      'dist/',
-      'generated/',
-      'coverage/',
-      '*.spec.ts',
-      '*.d.ts'
-    ],
+    ignores: ['eslint.config.mjs', 'dist/', 'generated/', 'coverage/', '*.spec.ts', '*.d.ts'],
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
@@ -45,5 +38,5 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-return': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
     },
-  }
+  },
 );
